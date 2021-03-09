@@ -1,0 +1,6 @@
+#checking  the show_id if is null and the 
+SELECT show_id FROM netflix.netflix_titles where show_id = 0 ;
+#checking if the data in release_year is correct 
+SELECT release_year FROM netflix.netflix_titles where length(release_year) <> 4 or release_year <= 1900 or release_year >=2022 ;
+
+
