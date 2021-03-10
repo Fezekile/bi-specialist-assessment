@@ -28,3 +28,14 @@ with dts as (SELECT TRIM(SUBSTRING(cast, 1, CHAR_LENGTH(cast) - CHAR_LENGTH(SUBS
 FROM netflix.netflix_titles_cast
 group by TRIM(SUBSTRING(cast, 1, CHAR_LENGTH(cast) - CHAR_LENGTH(SUBSTRING_INDEX(REVERSE(cast), ' ', 1)))))
 select * from dts order by Occurrance desc
+								
+#Which Movie had the longest timespan from release to appearing on Netflix
+#Answer : 'Pioneers: First Women Filmmakers*
+#Query----------------------------------------------------------
+										 
+with dts as (SELECT title,  (year(curdate())-release_year) as timespan, release_year
+FROM netflix.netflix_titles where release_year <> 0)
+select * from dts order by timespanInyears desc		
+
+
+
