@@ -36,8 +36,9 @@ select * from dts order by Occurrance desc
 with dts as (SELECT title,  (year(curdate())-release_year) as timespan, release_year
 FROM netflix.netflix_titles where release_year <> 0)
 select * from dts order by timespanInyears desc		
-										 
-										 
+#Which year had the largest increase year on year (percentage wise) for TV Shows?										 
+#Answer: 2019
+#Query----------------------------------------------------------------									 
 with dts as (SELECT year(date_added) as years , count(1) as numbers 
 FROM netflix.netflix_titles where type = 'TV Show' 
 group by year(date_added)
