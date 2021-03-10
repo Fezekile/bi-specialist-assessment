@@ -1,3 +1,15 @@
+#List the people who have appeared in a movie with Woody Harrelson more than once.
+#list--------------------------------
+		#Alden Ehrenreich
+		#Bill Murray
+		#Donald Glover
+		#Emilia Clarke
+		#Joonas Suotamo
+		#Paul Bettany
+		#Phoebe Waller-Bridge
+		#Thandie Newton
+		#William Sadler
+#Query
 WITH dts as 
 (
     SELECT A.cast as Actors,  COUNT(A.cast) as number
@@ -7,3 +19,12 @@ WITH dts as
 	GROUP BY A.cast
 )
 select * from dts where number > 1
+
+#What is the most common first name among actors and actresses?
+#Answer is null. Most of the the actors names not provided.
+#The  most common first name among actors and actresses is Michael
+#Query---------------------------------
+with dts as (SELECT TRIM(SUBSTRING(cast, 1, CHAR_LENGTH(cast) - CHAR_LENGTH(SUBSTRING_INDEX(REVERSE(cast), ' ', 1)))) AS firstNames , count(TRIM(SUBSTRING(cast, 1, CHAR_LENGTH(cast) - CHAR_LENGTH(SUBSTRING_INDEX(REVERSE(cast), ' ', 1))))) as Occurrance
+FROM netflix.netflix_titles_cast
+group by TRIM(SUBSTRING(cast, 1, CHAR_LENGTH(cast) - CHAR_LENGTH(SUBSTRING_INDEX(REVERSE(cast), ' ', 1)))))
+select * from dts order by Occurrance desc
