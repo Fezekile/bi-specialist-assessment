@@ -36,6 +36,16 @@ select * from dts order by Occurrance desc
 with dts as (SELECT title,  (year(curdate())-release_year) as timespan, release_year
 FROM netflix.netflix_titles where release_year <> 0)
 select * from dts order by timespanInyears desc		
+										 
+										 
+with dts as (SELECT year(date_added) as years , count(1) as numbers 
+FROM netflix.netflix_titles where type = 'TV Show' 
+group by year(date_added)
+) 
+select  years,numbers, round((numbers/(select count(1) from netflix.netflix_titles where type = 'TV Show'))*100,2) as PercentageIncrease 
+from dts
+group by years
+order by numbers desc
 
 
 
