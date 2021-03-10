@@ -10,7 +10,7 @@ CREATE TABLE netflix_titles (
     rating varchar(50)  ,
     description nvarchar(max) ,
     show_id number  NOT NULL,
-    
+    CONSTRAINT netflix_titles_pk PRIMARY KEY  (show_id)
 );
 
 -- Table: netflix_titles_cast
